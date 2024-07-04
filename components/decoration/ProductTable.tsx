@@ -37,7 +37,7 @@ const ProductTable = (params: DecorationParams) => {
     }
   })
   const onClick = (item: any) => {
-    float.push({ name: 'test', title: 'สินค้า', component: <Item  key={item?.id} params={params} item={item} /> })
+    float.push({ name: 'test', title: 'สินค้า', component: <Item  key={item?.id} params={params} item={item} /> })//
   }
   return (
     <Padding padding='10px' sx={{ flexShrink: '0' }}>
