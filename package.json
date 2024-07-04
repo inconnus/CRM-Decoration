@@ -1,0 +1,38 @@
+{
+  "name": "crm-decoration",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --experimental-https",
+    "devhttp": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@googlemaps/js-api-loader": "^1.16.6",
+    "@line/liff": "^2.23.2",
+    "@vis.gl/react-google-maps": "^1.1.0",
+    "dayjs": "^1.11.11",
+    "js-cookie": "^3.0.5",
+    "keen-slider": "^6.8.6",
+    "next": "14.2.4",
+    "qrcode.react": "^3.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "recoil": "^0.7.7",
+    "swr": "^2.2.5"
+  },
+  "devDependencies": {
+    "@types/google.maps": "^3.55.11",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4",
+    "sass": "^1.77.6",
+    "typescript": "^5"
+  }
+}

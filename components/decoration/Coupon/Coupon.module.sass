@@ -1,0 +1,78 @@
+.container
+    width: 100%
+    padding: 5px 20px 
+    box-sizing: border-box
+    flex-direction: column
+    align-items: center
+    z-index: 2
+
+    .item
+        position: relative
+        width: 100%
+        flex-shrink: 0
+        overflow: hidden
+        // padding: 0 10px
+        box-sizing: border-box
+        margin: 5px 0
+        border: 1px dashed #ccc
+        box-shadow: 0 0 3px 1px #cccccc46
+        padding: 0 10px
+        // border-radius: 5px
+        align-items: center
+        font-size: 0.9em
+        border-radius: 10px
+        background: #FFF
+        span.company_name
+            color: #777
+        img
+            height: 70px
+            border-radius: 3px
+            // overflow: hidden
+        .detail
+            position: relative
+            width: 100%
+            height: 100%
+            flex-direction: column
+            padding: 10px
+            box-sizing: border-box
+        .company
+            height: 100%
+            border-right: 1px dashed #ccc
+            justify-content: center
+            align-items: center
+            padding: 10px 15px 10px 5px
+            // padding-right: 10px
+
+            flex-direction: column
+            img.logo
+                border-radius: 50%
+                width: 55px
+                height: 55px
+                object-fit: cover
+                // margin-right: 5px
+            span
+                font-size: 0.8em
+                white-space: nowrap
+                margin-bottom: -5px
+        .info
+            flex-shrink: 0
+            span.status
+                color: #FFF
+                padding: 1px 15px
+                border-radius: 30px
+                &.USED
+                    background: #ffc010
+                &.AVAILABLE
+                    background: #04AB44
+                &.CANCELLED
+                    background: #ef2a2a
+                &.expire
+                    background: #aeaeae
+
+                    
+        .exp
+            position: absolute
+            right: 10px
+            bottom: 3px
+            font-size: 0.9em
+            color: #888
