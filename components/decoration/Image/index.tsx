@@ -23,7 +23,7 @@ const Image = (params) => {
     }, [mid, params])
 
     return (
-        <Padding padding={params?.type === 'full' ? '0' : '8px 16px'} sx={{ transition: 'padding 0.2s' }}>
+        <Padding padding={params?.type === 'full' ? '0' : '8px 16px'} sx={{ transition: 'padding 0.2s', ...params?.styles }}>
             {generateUrl() ?
                 <Link href={generateUrl()}  >
                     <IMG params={params} />

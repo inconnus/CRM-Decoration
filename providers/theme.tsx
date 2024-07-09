@@ -5,28 +5,54 @@ import { useModule, useScroll, useUi } from '@/hooks'
 import Background from '@/components/Background'
 import Loading from '@/widgets/Loading'
 import { Notify } from '@/widgets/Notify'
-import { ThemeProvider as EmotionThemeProvider, CacheProvider } from '@emotion/react'
+import { ThemeProvider as EmotionThemeProvider, CacheProvider, CSSObject } from '@emotion/react'
 import createCache from '@emotion/cache'
 import { Float } from '@/widgets/Float'
 import { useRecoilState } from 'recoil'
 import { scrollState } from '@/recoil/atoms/app'
 import Splash from '@/widgets/Splash'
+import { useParams } from 'next/navigation'
+import Alert from '@/widgets/Alert'
 declare module '@emotion/react' {
     export interface Theme {
         color: {
             primary: string
             secondary: string
+        },
+        components?: {
+            Button?: {
+                variants?: {
+                    primary?: CSSObject,
+                    secondary?: CSSObject
+                }
+            }
         }
     }
 }
 const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+    const { page } = useParams()
     const { data: ui } = useUi()
     const [_, setScroll] = useScroll();
 
     const theme = useMemo(() => ({
         color: {
-            primary: ui?.config?.colors?.[0] ?? 'red',
+            primary: ui?.config?.colors?.[0] ?? '#555',
             secondary: ui?.config?.colors?.[1] ?? '#777',
+        },
+        components: {
+            Button: {
+                variants: {
+                    primary: {
+                        backgroundColor: ui?.config?.colors?.[0],
+                        color: '#FFF',
+                        width: '100%',
+                        border: 'none',
+                        borderRadius: '25px',
+                        padding: '10px 0',
+                        fontSize: '1.2em',
+                    }
+                }
+            }
         }
     }), [ui])
     const myCache = useMemo(() => createCache({
@@ -40,6 +66,7 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
             <EmotionThemeProvider theme={theme}>
                 <Splash />
                 <Loading />
+                <Alert />
                 <Notify />
                 <Float />
                 <div id='page' className="app">
@@ -47,7 +74,7 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
                     <div onScroll={onScroll} className="page">
                         {children}
                     </div>
-                    <NavBar />
+                    {!ui?.config?.pages?.[page?.[0]]?.hideNavbar && <NavBar />}
                 </div>
             </EmotionThemeProvider>
         </CacheProvider>

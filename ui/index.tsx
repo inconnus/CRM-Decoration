@@ -5,13 +5,18 @@ import styled from '@emotion/styled';
 
 interface UIProps { sx?: CSSObject }
 
-const _Button = styled.button<UIProps>(props => ({ border: 'none', ...props?.sx }))
+interface ButtonProps extends UIProps { variant?: string }
 
+const ButtonBase = styled.button<ButtonProps>(props => {
+    return { border: 'none', ':disabled': { backgroundColor: '#ddd',color:'#777' }, ...(props?.theme?.components?.Button?.variants?.[props?.variant ?? 'default'] ?? {}), ...props?.sx }
+})
 export const Box = styled.div<UIProps>(props => ({ display: 'flex', ...props?.sx }))
 
 export const Center = styled.div<UIProps>(props => ({ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', ...props?.sx }))
 
 export const Grid = styled.div<UIProps>(props => ({ display: 'grid', ...props?.sx }))
+
+export const Spacer = styled.div<UIProps>(props => ({ display: 'flex', flex: '1', ...props?.sx }))
 
 export const Row = styled.div<UIProps>(props => ({ display: 'flex', ...props?.sx }))
 
@@ -25,9 +30,7 @@ export const Image = styled.img<UIProps>(props => props?.sx)
 
 export const Padding = styled.div<UIProps & { padding: string }>(({ padding, ...props }) => ({ padding, display: 'flex', flexDirection: 'column', ...props?.sx }))
 
-export const Button = ({ sx, ...props }: UIProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
-    return <_Button type='button' sx={sx} {...props} />
-}
+export const Button = forwardRef<HTMLButtonElement, ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>>((props, ref) => <ButtonBase ref={ref} type='button' {...props} />)
 
 export const Icon: React.FC<React.HTMLAttributes<HTMLElement> & UIProps & { icon: string }> = ({ icon, sx, ...props }) => {
     return (

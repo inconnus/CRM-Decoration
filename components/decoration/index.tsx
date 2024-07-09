@@ -16,33 +16,48 @@ import Carousel from './Carousel'
 import Text from './Text'
 import Branch from './Branch'
 import StoreHeader from './StoreHeader'
+import Checklist from './Checklist'
+import Policy from './Policy'
+import Button from './Button'
+
 import { useTheme } from '@emotion/react'
 import Tab from './Tab'
 import { SetterOrUpdater, useRecoilState } from 'recoil'
 import { decorationContextState } from '@/recoil/atoms/app'
 import ProductTable from './ProductTable'
+import { Column, Spacer } from '@/ui'
+import { useForm, FormProvider, useFormContext } from "react-hook-form"
+import SubPage from './SubPage'
+import OTP from './OTP'
+import Gender from './Gender'
+import BirthDay from './BirthDate'
+const ComponentMapData: any = { Migrate, Card, Info, Tier, Image, Coupon, Products, Video, Carousel, Text, Branch, StoreHeader, Tab, ProductTable, Spacer, Checklist, Policy, Button, SubPage, OTP, Gender, BirthDay }
 
-const ComponentMapData: any = { Migrate, Card, Info, Tier, Image, Coupon, Products, Video, Carousel, Text, Branch, StoreHeader, Tab, ProductTable }
-const Components = ({ name, context, params }: { name: string, context: [any, SetterOrUpdater<any>], params: any }) => {
+export const Components = ({ name, params, method }: { name: string, params: any, method?: any }) => {
     const { mid } = useParams()
     const { data: member } = useMember()
     const [line] = useLine()
     const theme = useTheme()
+    const form = useFormContext()
     const Component = ComponentMapData[name]
-    return Component ? <Component {...params} mid={mid} member={member} line={line} theme={theme} context={context} /> : null
+    return Component ? <Component {...params} mid={mid} member={member} line={line} theme={theme} form={form} method={method} /> : null
 }
 
 const ComponentMap = () => {
+    const methods = useForm()
     const { page } = useParams()
-    const context = useRecoilState<any>(decorationContextState)
+    const currentPage = page?.[0] || 'home'
     const { data: ui } = useUi()
+
     return (
-        <>
-            {ui?.config?.pages?.[page?.toString() || 'home']?.header && <Headers />}
-            {ui?.config?.pages?.[page?.toString() || 'home']?.contents?.map((item: any) => (
-                <Components key={item?.id}  context={context} name={item?.type} params={item?.params} />
-            ))}
-        </>
+        <FormProvider {...methods}>
+            <Column sx={{ ...ui?.config?.pages?.[currentPage]?.styles }} className="page_content">
+                {ui?.config?.pages?.[currentPage]?.header && <Headers />}
+                {ui?.config?.pages?.[currentPage]?.contents?.map((item: any) => (
+                    <Components key={item?.id} name={item?.type} params={item?.params} />
+                ))}
+            </Column>
+        </FormProvider>
 
     )
 }

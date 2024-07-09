@@ -16,10 +16,11 @@ const Item = ({ params, item, onClick }: { params: DecorationParams, item: any, 
   </Column>
 )
 const ProductTable = (params: DecorationParams) => {
+  const { watch } = params.form
   const { data, observeRef } = useSWRScrollMeili({
     url: 'https://search.inventory.dataslot.app/indexes/inventories/search',
     body: {
-      "q": params?.context?.[0]?.search,
+      "q": watch('search'),
       "filter": [
         "company = DrPONG",
         "status = NORMAL",
@@ -37,13 +38,13 @@ const ProductTable = (params: DecorationParams) => {
     }
   })
   const onClick = (item: any) => {
-    float.push({ name: 'test', title: 'สินค้า', component: <Item  key={item?.id} params={params} item={item} /> })//
+    float.push({ name: 'test', title: 'สินค้า', component: <Item key={item?.id} params={params} item={item} /> })//
   }
   return (
     <Padding padding='10px' sx={{ flexShrink: '0' }}>
       <Grid ref={observeRef} sx={{ gap: '10px', gridTemplateColumns: 'repeat(auto-fill,minmax(170px,1fr))' }} >
         {data?.map((item) => (
-          <Item onClick={()=>onClick(item)} key={item?.id} params={params} item={item} />
+          <Item onClick={() => onClick(item)} key={item?.id} params={params} item={item} />
         ))}
 
       </Grid>

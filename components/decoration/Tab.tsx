@@ -3,11 +3,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Box, Button, Padding, Row, Text } from '@/ui'
 {/* <Text>{params.context[0].search}</Text> */ }
 const Tab = (params: DecorationParams) => {
+    const { setValue } = params.form
     const [currentTab, setCurrentTab] = useState('')
     const [noth, setNoth] = useState({ width: 0, left: 0 })
     const parantRef = useRef<HTMLDivElement>(null)
     const onSelect = (e: React.MouseEvent<HTMLButtonElement>, value: string) => {
-        params.context[1](prev => ({ ...prev, tab: value }))
+        setValue('tab', value)
         setNoth({
             width: e.currentTarget.clientWidth,
             left: e.currentTarget.offsetLeft
@@ -19,7 +20,7 @@ const Tab = (params: DecorationParams) => {
             width: parantRef.current?.children[0].clientWidth || 0,
             left: 0
         })
-        params.context[1](prev => ({ ...prev, tab: params?.contents?.[0]?.value }))
+        setValue('tab', params?.contents?.[0]?.value)
     }, [])
     return (
         <Row sx={{ backgroundColor: '#FFF', position: 'relative', boxShadow: 'inset 0 -2px 0 0px #ddd', }}>
@@ -31,7 +32,7 @@ const Tab = (params: DecorationParams) => {
                         background: 'none',
                         position: 'relative',
                         padding: '10px 16px',
-                        fontSize:'20px'
+                        fontSize: '20px'
                     }}>{item?.label}</Button>
                 ))}
                 <Box style={{

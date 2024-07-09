@@ -1,0 +1,69 @@
+.gender
+    width: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    .next_btn
+        transition: all 0.2s
+        &.show
+            opacity: 1
+            transform: scale(1)
+        &.hide
+            opacity: 0
+            transform: scale(0.95)
+    .title
+        margin-top: -30px
+        margin-bottom: 10px
+        bottom: auto !important
+        position: relative
+        color: #FFF
+        width: 100%
+        text-align: center
+        font-size: 2em
+    .btns
+        width: 100%
+        justify-content: space-around
+        display: flex
+        label
+            .content
+                position: relative
+                background: #ffffffea
+                width: 130px
+                height: 130px
+                border: none
+                border-radius: 20px
+                display: flex
+                display: flex
+                justify-content: center
+                align-items: center
+                &.female
+                    color: #F9789A
+                &.male
+                    color: #4690FF
+            i
+                justify-content: center
+                right: auto !important
+                font-size: 2.5em
+
+        span
+            position: absolute
+            bottom: -40px
+            color: #FFF
+            font-size: 1.2em
+
+        input
+            opacity: 0
+            width: 0
+            height: 0
+            z-index: 1
+            position: absolute
+            &:checked
+                ~ .content
+                    &.male
+                        background: #4690ffd8 !important
+                        i
+                            color: #FFF !important
+                    &.female
+                        background: #f9789ac5 !important
+                        i
+                            color: #FFF !important

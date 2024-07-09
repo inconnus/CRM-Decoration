@@ -4,7 +4,8 @@ import { Column, IconButton, Image, Input, Padding, Row, TextField, Text, Icon }
 import { useParams } from 'next/navigation'
 import React, { useTransition } from 'react'
 
-const StoreHeader =  (params: DecorationParams) => {
+const StoreHeader = (params: DecorationParams) => {
+    const { register } = params.form
     const [, startTransition] = useTransition()
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         startTransition(() => {
@@ -27,7 +28,7 @@ const StoreHeader =  (params: DecorationParams) => {
                         </Row>
                     </Column>
                 </Row>
-                <TextField onChange={onChange} sx={{ 'i': { color: params?.theme?.color?.primary } }} icon='search' placeholder='ค้นหาสินค้า' />
+                <TextField {...register('search')} sx={{ 'i': { color: params?.theme?.color?.primary } }} icon='search' placeholder='ค้นหาสินค้า' />
             </Column>
         </Padding>
     )

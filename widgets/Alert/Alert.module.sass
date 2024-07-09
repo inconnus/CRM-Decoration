@@ -1,0 +1,106 @@
+@keyframes dialog-open
+    0%
+        transform: scale(0.3)
+    60%
+        transform: scale(1.05)
+    80%
+        transform:  scale(0.95)
+    100%
+        transform:  scale(1)
+@keyframes dialog-close
+    0%
+        transform: scale(1)
+    60%
+        transform: scale(0.95)
+    80%
+        transform:  scale(1.05)
+    100%
+        transform:  scale(0.3)
+@keyframes init
+      to
+          transform: translate3d(0,0,0)
+          opacity: 1  
+.alert_container
+    position: fixed
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 100vw
+    height: 100vh
+    z-index: 99999
+    background: #00000079
+    backdrop-filter: blur(1px)
+    .buttons
+        display: flex
+        // gap: 10px
+    button
+        background: var(--primary-color)
+        border: none
+        color: #FFF
+        border-radius: 25px
+        padding: 8px 45px
+        font-size: 1em
+        margin: 10px 0
+        box-sizing: 0 0 2px 1px #0000005d
+        &:first-child
+            margin-right: 10px
+        .cancel
+            background: #aaa
+.wait
+    
+    background: #FFF
+    padding: 25px 15px 5px 15px
+    width: 85%
+    left: 10%
+    box-sizing: border-box
+    display: flex
+    flex-direction: column
+    align-items: center
+    border-radius: 5px
+    overflow: hidden
+    animation: dialog-open .4s forwards
+    img
+        width: 150px
+    .cancel
+        background: #aaa
+    .title
+        font-size: 1.3em
+        margin-top: 15px
+    .detail
+        color: #555
+        white-space: pre-wrap
+        text-align: center
+    .success
+        font-size: 4.5em
+        color: #72BD36
+        transform: scale(0.5)
+        animation-delay: 4s
+        animation: dialog-open .4s forwards
+    .confirm
+        font-size: 4.5em
+        color: var(--primary-color)
+        transform: scale(0.5)
+        animation-delay: 4s
+        animation: dialog-open .4s forwards
+    .error
+        font-size: 4.5em
+        color: #E95B5B
+    .logo
+        position: relative
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100px
+        height: 100px
+        img
+            
+            position: absolute
+        .outside
+            transform: rotate(0deg)
+            animation: spin linear 3s infinite
+            width: 100%
+        .inside
+            width: 30%
+            transform: scale(1)
+            animation: beat linear 3s infinite
+        

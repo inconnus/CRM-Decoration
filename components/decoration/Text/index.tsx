@@ -1,10 +1,12 @@
 import React from 'react'
 import styles from './index.module.sass'
-const Text = (params) => {
+import { Padding, Text as TextUI } from '@/ui'
+import { DecorationParams, } from '@/types/DecorationParams'
+const Text = (params: DecorationParams) => {
     return (
-        <div className={`${styles.container} ${params?.type === 'full' ? styles.full : null}`}>
-            <div className={styles.text} >{params?.content}</div>
-        </div>
+        <Padding padding={params?.type === 'full' ? '0' : '8px 16px'} sx={{ transition: 'padding 0.2s' }}>
+            <TextUI sx={{ whiteSpace: 'pre-wrap', textAlign: 'center' }} >{params?.content}</TextUI>
+        </Padding >
     )
 }
 
